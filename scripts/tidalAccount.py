@@ -28,6 +28,8 @@ class TidalAccount():
         if not self._session.check_login():
             logging.error("Could not log in to Tidal. Exiting...")
             exit(1)
+        
+        self.account_information()
 
     def _restore_session(self) -> bool:
         """ Restore session from the credentials file if it exists """
@@ -104,6 +106,13 @@ class TidalAccount():
         else:
             logging.error("Failed to create new Tidal session. Exiting...")
             exit(1)
+        
+    def account_information(self) -> None:
+        """ Print basic account information to the log """
+
+        logging.info(
+            f"Logged into Tidal Account {self._session.user.id} ({self._session.user.email})"
+        )
 
 if __name__ == "__main__":
 
